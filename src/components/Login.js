@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Loginform } from "./forms/LoginForm";
-import { delAuth, initAuth } from "../redux/actions";
-import axios from "axios";
+import { delAuth } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
 export function Login(props) {

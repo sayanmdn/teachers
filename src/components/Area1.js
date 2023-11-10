@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 export function Area1(props) {
-  const [isHidden, setisHidden] = useState(true);
-  const onFirstlineComplete = () => {
-    setisHidden(false);
-  };
+  // const [isHidden, setisHidden] = useState(true);
+  // const onFirstlineComplete = () => {
+  //   setisHidden(false);
+  // };
 
   return (
     <div className="body-backgroud">

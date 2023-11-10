@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { useFormik } from "formik";
@@ -32,13 +31,13 @@ export function Warehouse(props) {
         console.log("error returned at fetchData: " + err);
       });
   };
-  const auth = useSelector((state) => state.auth);
-  if (auth.isLoggedIn) {
-    var userId = auth.user.id;
-  }
+  // const auth = useSelector((state) => state.auth);
+  // // if (auth.isLoggedIn) {
+  // //   var userId = auth.user.id;
+  // // }
 
-  var [saveSuccess, setSaveSuccess] = useState(false);
-  const [savedData, setSavedData] = useState(testData);
+  // var [saveSuccess, setSaveSuccess] = useState(false);
+  // const [savedData, setSavedData] = useState(testData);
   const formik = useFormik({
     initialValues: {
       data: "",
@@ -49,7 +48,7 @@ export function Warehouse(props) {
         .then((res) => {
           //USERCREATED SUCCESS
           if (res.data.code === "dataSaved") {
-            setSaveSuccess(true);
+            // setSaveSuccess(true);
             alert("Data saved successfully");
           }
 

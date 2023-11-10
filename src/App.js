@@ -5,7 +5,7 @@ import { Login } from "./components/Login";
 import { Area1 } from "./components/Area1";
 import { Signup } from "./components/Signup";
 import { Warehouse } from "./components/Warehouse";
-import { Cake } from "./components/CakeContainer";
+// import { Cake } from "./components/CakeContainer";
 import { NewsComponent } from "./components/NewsContainer";
 import { WriteComponent } from "./components/WriteComponent";
 import reactGa from "react-ga";

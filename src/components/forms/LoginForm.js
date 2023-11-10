@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { initAuth } from "../../redux/actions";
 import { URL } from "../../config";
 
