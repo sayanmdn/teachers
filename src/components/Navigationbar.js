@@ -51,7 +51,7 @@ export function Navigationbar(props) {
           style={{ color: "#bbb", marginLeft: "100px" }}
           component={Nav.Link}
         >
-          Sayantan's Webapps
+          Find My Teacher
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
