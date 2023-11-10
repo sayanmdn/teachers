@@ -32,6 +32,7 @@ export function Area1() {
                   background: "linear-gradient(#112233, #002222)",
                   borderRadius: "1rem",
                   borderBlockColor: "wheat",
+                  color: "white",
                 }}
               />
             </Form.Group>
