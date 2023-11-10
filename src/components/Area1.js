@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import gitLogo from "./../assets/github.svg";
-import linkedinLogo from "./../assets/linkedin-logo.svg";
 
 export function Area1(props) {
   const [isHidden, setisHidden] = useState(true);
@@ -15,18 +12,18 @@ export function Area1(props) {
         <div className="Area1">
           <div style={{ fontSize: 50 }}>Hi, I am Sayantan Mishra</div>
         </div>
-        <div className="home-social-links">
+        {/* <div className="home-social-links">
           <a href="https://github.com/sayanmdn">
-            <img src={gitLogo} width="40px" />
+            <svg src={gitLogo} width="40px" />
           </a>
           <a href="https://www.linkedin.com/in/sayanmdn/">
-            <img
+            <svg
               src={linkedinLogo}
               width="40px"
               style={{ marginLeft: "30px" }}
             />
           </a>
-        </div>
+        </div> */}
       </div>
       <div className="home-projects">
         <h2>Projects :</h2>
