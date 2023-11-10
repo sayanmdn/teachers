@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Typewriter } from "react-typewriting-effect";
-import "react-typewriting-effect/dist/index.css";
 import gitLogo from "./../assets/github.svg";
 import linkedinLogo from "./../assets/linkedin-logo.svg";
 
@@ -15,16 +13,7 @@ export function Area1(props) {
     <div className="body-backgroud">
       <div className="home-upper">
         <div className="Area1">
-          <div>
-            <Typewriter
-              string="Hi, I am Sayantan Mishra"
-              delay={80}
-              stopBlinkinOnComplete
-              onComplete={onFirstlineComplete}
-              className="typeWritter"
-            />
-          </div>
-          {isHidden ? null : <Writer2 />}
+          <div style={{ fontSize: 50 }}>Hi, I am Sayantan Mishra</div>
         </div>
         <div className="home-social-links">
           <a href="https://github.com/sayanmdn">
@@ -54,18 +43,6 @@ export function Area1(props) {
           <br />
         </ul>
       </div>
-    </div>
-  );
-}
-
-export function Writer2(props) {
-  return (
-    <div>
-      <Typewriter
-        string="Software Developer @Onmo"
-        delay={30}
-        stopBlinkinOnComplete
-      />
     </div>
   );
 }
