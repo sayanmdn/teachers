@@ -22,7 +22,7 @@
 .home-social-links{
     position: relative;
     margin-top: 30px;
-    animation: 4s fadeIn;
+    animation: 1s fadeIn;
   animation-fill-mode: forwards;
   
   /* visibility: hidden; */
