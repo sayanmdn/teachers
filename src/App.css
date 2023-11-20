@@ -58,7 +58,7 @@
   background: linear-gradient(#112233, #002222);
   color: white;
   text-align: center;
-  height: 92.7vh
+  height: 100vh
 }
 
 @media screen and (min-width: 480px) {

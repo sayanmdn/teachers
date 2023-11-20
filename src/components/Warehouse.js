@@ -6,6 +6,7 @@ import { URL } from "../config";
 import reactGa from "react-ga";
 
 export function Warehouse(props) {
+  console.log(props);
   const [testData, setTestData] = useState([]);
   const [stateToken, setStateToken] = useState("");
 

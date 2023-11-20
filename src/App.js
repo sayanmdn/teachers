@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { Navigationbar } from "./components/Navigationbar";
 import { Login } from "./components/Login";
 import { Area1 } from "./components/Area1";
-import { Signup } from "./components/Signup";
+import { Register } from "./components/Register";
 import { Warehouse } from "./components/Warehouse";
-// import { Cake } from "./components/CakeContainer";
+import { Profile } from "./components/Profile";
 import { NewsComponent } from "./components/NewsContainer";
 import { WriteComponent } from "./components/WriteComponent";
 import reactGa from "react-ga";
@@ -33,8 +33,8 @@ function App() {
             <Route exact path="/login">
               <Login />
             </Route>
-            <Route exact path="/signup">
-              <Signup />
+            <Route exact path="/register">
+              <Register />
             </Route>
             <Route exact path="/warehouse">
               <Warehouse />
@@ -45,6 +45,7 @@ function App() {
             <Route exact path="/write">
               <WriteComponent />
             </Route>
+            <Route path="/profile/:username" component={Profile} />
           </div>
         </Switch>
       </Router>

@@ -51,21 +51,6 @@ export function Area1() {
           </Form>
         </div>
       </div>
-      {/* <div className="home-projects">
-        <h2>Projects :</h2>
-        <ul>
-          <li>Warehouse - Http Logger:</li>
-          <p>
-            Please signup with your email id in th top right bar and login to
-            use it.
-          </p>
-          <li>News:</li>
-          <p>Condense the latest news in India into one-line summaries.</p>
-          <li>Rewrite:</li>
-          <p>It provides a different wording for the sentence.</p>
-          <br />
-        </ul>
-      </div> */}
     </div>
   );
 }

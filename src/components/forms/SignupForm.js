@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import axios from "axios";
 import { URL } from "../../config";
+import { TEACHER_USER_ROLE } from "../../constants";
 
 export function SignupForm(props) {
   var [emailAlreadyExists, setemailAlreadyExists] = useState(false);
@@ -13,15 +14,10 @@ export function SignupForm(props) {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
   const formik = useFormik({
-    initialValues: {
-      email: "",
-      name: "",
-      password: "",
-      otp: "",
-    },
+    initialValues: {},
     onSubmit: (values) => {
       axios
-        .post(`${URL}user/signup`, values)
+        .post(`${URL}user/signup`, { ...values, role: TEACHER_USER_ROLE })
         .then((res) => {
           if (res.data === "Email already exists") {
             setemailAlreadyExists(true);
@@ -40,24 +36,24 @@ export function SignupForm(props) {
             let result = msg.search("password");
             if (result) setPasswordValidationError(msg);
           }
-          console.log(res);
+          // console.log(res);
           // console.log(res.data);
         })
         .catch((error) => {
           console.log(error);
         });
-      // alert(JSON.stringify(values));
     },
   });
   const sendOTP = () => {
-    let email = formik.values.email;
-    console.log("Email provided to send otp " + email);
-    axios.post(`${URL}user/otpsend`, { email }).then((res) => {
-      console.log("Email Sent response 1 " + JSON.stringify(res));
+    let { phone } = formik.values;
+    axios.post(`${URL}user/otpsend`, { phone, role: "TEACHER" }).then((res) => {
       if (res.data.code === "otpSent") {
-        console.log("Email Sent response 2 " + res);
         setOtpSentSuccessfully(true);
-        alert("OTP Sent Successfully to your Email");
+        alert("OTP Sent Successfully to your phone");
+      }
+      if (res.data.code === "validationFalse") {
+        setOtpSentSuccessfully(true);
+        alert(res.data.message || "Error: OTP not sent");
       }
     });
   };
@@ -82,27 +78,27 @@ export function SignupForm(props) {
               value={formik.values.name}
             />
           </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+          <Form.Group controlId="formBasicPhone">
+            <Form.Label>Phone Number</Form.Label>
             <Form.Control
-              type="email"
-              placeholder="Enter email"
-              name="email"
+              type="phone"
+              placeholder="Enter phone number"
+              name="phone"
               readOnly={otpSentSuccessfully}
               onChange={formik.handleChange}
-              value={formik.values.email}
+              value={formik.values.phone}
             />
             <Form.Text className="text-muted" hidden={!emailAlreadyExists}>
-              This email is already exists, try with another email
+              This phone number is already exists, try with another number
             </Form.Text>
             <Form.Text className="text-muted">
               <Button onClick={sendOTP} hidden={otpSentSuccessfully}>
-                Send OTP to my email
+                Send OTP to phone number
               </Button>
             </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicOTP">
-            <Form.Label>OTP</Form.Label>
+            <Form.Label>OTP (That is sent to the phone number)</Form.Label>
             <Form.Control
               type="otp"
               name="otp"
@@ -113,7 +109,7 @@ export function SignupForm(props) {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Password (To be set for the account)</Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
@@ -125,6 +121,56 @@ export function SignupForm(props) {
               Error: {passwordValidationError}
             </Form.Text>
           </Form.Group>
+
+          <Form.Group controlId="formBasicSubject">
+            <Form.Label>Primary Subjects (Mathematics,Physics,etc)</Form.Label>
+            <Form.Control
+              type="subject"
+              name="subject"
+              placeholder="Enter Subject"
+              onChange={formik.handleChange}
+              value={formik.values.subject}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicRange">
+            <Form.Label>Teach from class </Form.Label>
+            {/* Use a standard HTML select element */}
+            <select
+              name="selectedFromRange"
+              onChange={formik.handleChange}
+              value={formik.values.selectedFromRange}
+              className="form-select" // Add any necessary styling class
+              style={{ marginLeft: "2%" }}
+            >
+              {/* Generate options for numbers 1 to 12 */}
+              {[...Array(12).keys()].map((num) => (
+                <option key={num + 1} value={num + 1}>
+                  {num + 1}
+                </option>
+              ))}
+            </select>
+          </Form.Group>
+
+          <Form.Group controlId="formBasicRange">
+            <Form.Label>Teach to class </Form.Label>
+            {/* Use a standard HTML select element */}
+            <select
+              name="selectedToRange"
+              onChange={formik.handleChange}
+              value={formik.values.selectedToRange}
+              className="form-select" // Add any necessary styling class
+              style={{ marginLeft: "2%" }}
+            >
+              {/* Generate options for numbers 1 to 12 */}
+              {[...Array(12).keys()].map((num) => (
+                <option key={num + 1} value={num + 1}>
+                  {num + 1}
+                </option>
+              ))}
+            </select>
+          </Form.Group>
+
           <Button variant="primary" type="submit">
             Signup
           </Button>
