@@ -21,7 +21,7 @@ export function Profile() {
     }
 
     fetchProfile();
-  }, []);
+  }, [id]);
 
   return (
     <div className="body-backgroud">
