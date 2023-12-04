@@ -45,7 +45,7 @@ function App() {
             <Route exact path="/write">
               <WriteComponent />
             </Route>
-            <Route path="/profile/:username" component={Profile} />
+            <Route path="/teachers/:id" component={Profile} />
           </div>
         </Switch>
       </Router>

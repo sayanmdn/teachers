@@ -76,6 +76,9 @@
 .home-upper{
   height: 40vh;
 }
+.profile-upper{
+  height: 10vh;
+}
 @media screen and (max-height: 680px) {
   .home-projects{
     margin-top: 40vh;

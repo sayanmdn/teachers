@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Form, Button, Spinner, ListGroup } from "react-bootstrap";
 import { useFormik } from "formik";
 import React, { useState } from "react";
@@ -91,7 +92,8 @@ export function Area1() {
           >
             {testData.map((item, index) => (
               <ListGroup.Item key={index}>
-                <strong>Name:</strong> {item.name}
+                <strong>Name:</strong>{" "}
+                <Link to={`/teachers/${item._id}`}>{item.name}</Link>
                 <br />
                 <strong>Subjects:</strong> {item.subjects.join(", ")}
                 <br />
