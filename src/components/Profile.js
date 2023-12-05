@@ -3,12 +3,15 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { URL } from "../config";
 import { Row, Col } from "react-bootstrap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export function Profile() {
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
+    AOS.init();
     async function fetchProfile() {
       try {
         const response = await axios.post(`${URL}teachers/findById`, { id });
@@ -32,7 +35,7 @@ export function Profile() {
         </div>
       </div>
       {profile && (
-        <div className="profile-main">
+        <div className="profile-main" data-aos="fade-up">
           <Row>
             <Col sm={6}>
               <div className="home-main-right">
