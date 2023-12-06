@@ -16,7 +16,6 @@ export function Profile() {
       try {
         const response = await axios.post(`${URL}teachers/findById`, { id });
         setProfile(response.data);
-        console.log("response ", response);
         return response;
       } catch (e) {
         console.log(e);
@@ -28,14 +27,14 @@ export function Profile() {
 
   return (
     <div className="body-backgroud">
-      <div className="profile-upper">
+      <div className="profile-upper" data-aos="fade-up">
         <div>
           <h3>Profile Page</h3>
           <p>Id: {id}</p>
         </div>
       </div>
       {profile && (
-        <div className="profile-main" data-aos="fade-up">
+        <div className="profile-main">
           <Row>
             <Col sm={6}>
               <div className="home-main-right">
