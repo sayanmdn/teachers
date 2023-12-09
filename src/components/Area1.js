@@ -17,7 +17,7 @@ export function Area1() {
       setLoading(true);
       setTestData();
       axios
-        .post(`${URL}teachers/find`, { data: values.data })
+        .post(`${URL}teachers/find`, { data: values.data.trim() })
         .then((res) => {
           if (res.data) {
             setLoading(false);
