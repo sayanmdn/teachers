@@ -34,8 +34,11 @@ export function SignupForm(props) {
           otp: values.otp,
           password: values.password,
           phone: values.phone,
+          college: values.college,
+          subjectEnrolled: values.subjectEnrolled,
+          degreeEnrolled: values.degreeEnrolled,
           subjects: transformArray(
-            values.subjects,
+            values.subjects.map((e) => e.trim()),
             values.selectedFromRange,
             values.selectedToRange
           ),
@@ -118,7 +121,7 @@ export function SignupForm(props) {
             <Form.Control
               type="name"
               name="name"
-              placeholder="Enter name"
+              placeholder="Enter Name"
               onChange={formik.handleChange}
               value={formik.values.name}
             />
@@ -127,7 +130,7 @@ export function SignupForm(props) {
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
               type="phone"
-              placeholder="Enter phone number"
+              placeholder="Enter Phone Number"
               name="phone"
               readOnly={otpSentSuccessfully}
               onChange={formik.handleChange}
@@ -138,16 +141,19 @@ export function SignupForm(props) {
             </Form.Text>
             <Form.Text className="text-muted">
               <Button onClick={sendOTP} hidden={otpSentSuccessfully}>
-                Send OTP to phone number
+                Send OTP to the phone number
               </Button>
             </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicOTP">
-            <Form.Label>OTP (That is sent to the phone number)</Form.Label>
+            <Form.Label>
+              One-Time Password (OTP), which is sent to the respective phone
+              number
+            </Form.Label>
             <Form.Control
               type="otp"
               name="otp"
-              placeholder="Enter otp"
+              placeholder="Enter OTP"
               onChange={formik.handleChange}
               value={formik.values.otp}
             />
@@ -167,6 +173,45 @@ export function SignupForm(props) {
             </Form.Text>
           </Form.Group>
 
+          <Form.Group controlId="formBasicCollege">
+            <Form.Label>
+              Name of the college where you pursuing / completed studing?
+            </Form.Label>
+            <Form.Control
+              name="college"
+              placeholder="Name of college"
+              onChange={formik.handleChange}
+              value={formik.values.college}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicSpecilization">
+            <Form.Label>
+              What subject are you pursuing / completed in college?
+            </Form.Label>
+            <Form.Control
+              name="subjectEnrolled"
+              placeholder="Subject you are enrolled in"
+              onChange={formik.handleChange}
+              value={formik.values.subjectEnrolled}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicDegree">
+            <Form.Label>
+              What degree are you pursuing / completed in college?
+            </Form.Label>
+            <Form.Control
+              name="degreeEnrolled"
+              placeholder="Degree you are enrolled in"
+              onChange={formik.handleChange}
+              value={formik.values.degreeEnrolled}
+            />
+          </Form.Group>
+          <Form.Label>
+            Please specify the subjects you would like to receive tuition
+            requests for, indicating the class level as well.
+          </Form.Label>
           {/* Subjects, selectedFromRange, and selectedToRange input fields */}
           {formik.values.subjects.map((subject, index) => (
             <div key={index}>
