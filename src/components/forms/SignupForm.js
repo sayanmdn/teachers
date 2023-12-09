@@ -5,19 +5,41 @@ import axios from "axios";
 import { URL } from "../../config";
 import { TEACHER_USER_ROLE } from "../../constants";
 
+const transformArray = (subjects, selectedFromRange, selectedToRange) => {
+  return subjects.map((subject, index) => ({
+    subject: subject,
+    selectedFromRange: parseInt(selectedFromRange[index]),
+    selectedToRange: parseInt(selectedToRange[index]),
+  }));
+};
+
 export function SignupForm(props) {
-  var [emailAlreadyExists, setemailAlreadyExists] = useState(false);
-  var [signupSuccess, setSignupSuccess] = useState(false);
-  var [passwordValidationError, setPasswordValidationError] = useState(null);
+  const [emailAlreadyExists, setemailAlreadyExists] = useState(false);
+  const [signupSuccess, setSignupSuccess] = useState(false);
+  const [passwordValidationError, setPasswordValidationError] = useState(null);
   const [otpSentSuccessfully, setOtpSentSuccessfully] = useState(false);
 
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
+  // Initialize form values with arrays for subjects, selectedFromRange, and selectedToRange
   const formik = useFormik({
-    initialValues: {},
+    initialValues: {
+      subjects: [""],
+      selectedFromRange: [1],
+      selectedToRange: [1],
+    },
     onSubmit: (values) => {
       axios
-        .post(`${URL}user/signup`, { ...values, role: TEACHER_USER_ROLE })
+        .post(`${URL}user/signup`, {
+          name: values.name,
+          role: TEACHER_USER_ROLE,
+          otp: values.otp,
+          password: values.password,
+          phone: values.phone,
+          subjects: transformArray(
+            values.subjects,
+            values.selectedFromRange,
+            values.selectedToRange
+          ),
+        })
         .then((res) => {
           if (res.data === "Email already exists") {
             setemailAlreadyExists(true);
@@ -38,6 +60,7 @@ export function SignupForm(props) {
         });
     },
   });
+
   const sendOTP = () => {
     let { phone } = formik.values;
     axios.post(`${URL}user/otpsend`, { phone, role: "TEACHER" }).then((res) => {
@@ -46,21 +69,49 @@ export function SignupForm(props) {
         alert("OTP Sent Successfully to your phone");
       }
       if (res.data.code === "validationFalse") {
-        setOtpSentSuccessfully(true);
+        setOtpSentSuccessfully(false);
         alert(res.data.message || "Error: OTP not sent");
       }
     });
   };
-  if (signupSuccess)
-    return (
-      <div>
-        <h2>Signup Successful</h2>
-        <h3>Please try to login</h3>
-      </div>
-    );
-  else
-    return (
-      <div>
+
+  const addSubjectField = () => {
+    formik.setFieldValue("subjects", [...formik.values.subjects, ""]);
+    formik.setFieldValue("selectedFromRange", [
+      ...formik.values.selectedFromRange,
+      1,
+    ]);
+    formik.setFieldValue("selectedToRange", [
+      ...formik.values.selectedToRange,
+      1,
+    ]);
+  };
+
+  const removeSubjectField = (index) => {
+    const subjects = [...formik.values.subjects];
+    if (subjects.length === 1) {
+      return;
+    }
+    const selectedFromRange = [...formik.values.selectedFromRange];
+    const selectedToRange = [...formik.values.selectedToRange];
+
+    subjects.splice(index, 1);
+    selectedFromRange.splice(index, 1);
+    selectedToRange.splice(index, 1);
+
+    formik.setFieldValue("subjects", subjects);
+    formik.setFieldValue("selectedFromRange", selectedFromRange);
+    formik.setFieldValue("selectedToRange", selectedToRange);
+  };
+
+  return (
+    <div>
+      {signupSuccess ? (
+        <div>
+          <h2>Signup Successful</h2>
+          <h3>Please try to login</h3>
+        </div>
+      ) : (
         <Form className="login-form" onSubmit={formik.handleSubmit}>
           <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>
@@ -116,59 +167,79 @@ export function SignupForm(props) {
             </Form.Text>
           </Form.Group>
 
-          <Form.Group controlId="formBasicSubject">
-            <Form.Label>Primary Subjects (Mathematics,Physics,etc)</Form.Label>
-            <Form.Control
-              type="subject"
-              name="subject"
-              placeholder="Enter Subject"
-              onChange={formik.handleChange}
-              value={formik.values.subject}
-            />
-          </Form.Group>
+          {/* Subjects, selectedFromRange, and selectedToRange input fields */}
+          {formik.values.subjects.map((subject, index) => (
+            <div key={index}>
+              <Form.Group controlId={`formBasicSubject${index}`}>
+                <Form.Label>{`Subject ${index + 1}`}</Form.Label>
+                <Form.Control
+                  type="subject"
+                  name={`subjects[${index}]`}
+                  placeholder="Enter Subject"
+                  onChange={formik.handleChange}
+                  value={formik.values.subjects[index]}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="formBasicRange">
-            <Form.Label>Teach from class </Form.Label>
-            {/* Use a standard HTML select element */}
-            <select
-              name="selectedFromRange"
-              onChange={formik.handleChange}
-              value={formik.values.selectedFromRange}
-              className="form-select" // Add any necessary styling class
-              style={{ marginLeft: "2%" }}
-            >
-              {/* Generate options for numbers 1 to 12 */}
-              {[...Array(12).keys()].map((num) => (
-                <option key={num + 1} value={num + 1}>
-                  {num + 1}
-                </option>
-              ))}
-            </select>
-          </Form.Group>
+              <Form.Group controlId={`formBasicRangeFrom${index}`}>
+                <Form.Label>{`Teach from class ${index + 1}`}</Form.Label>
+                <select
+                  name={`selectedFromRange[${index}]`}
+                  onChange={formik.handleChange}
+                  value={formik.values.selectedFromRange[index]}
+                  className="form-select"
+                  style={{ marginLeft: "2%" }}
+                >
+                  {[...Array(12).keys()].map((num) => (
+                    <option key={num + 1} value={num + 1}>
+                      {num + 1}
+                    </option>
+                  ))}
+                </select>
+              </Form.Group>
 
-          <Form.Group controlId="formBasicRange">
-            <Form.Label>Teach to class </Form.Label>
-            {/* Use a standard HTML select element */}
-            <select
-              name="selectedToRange"
-              onChange={formik.handleChange}
-              value={formik.values.selectedToRange}
-              className="form-select" // Add any necessary styling class
-              style={{ marginLeft: "2%" }}
-            >
-              {/* Generate options for numbers 1 to 12 */}
-              {[...Array(12).keys()].map((num) => (
-                <option key={num + 1} value={num + 1}>
-                  {num + 1}
-                </option>
-              ))}
-            </select>
-          </Form.Group>
+              <Form.Group controlId={`formBasicRangeTo${index}`}>
+                <Form.Label>{`Teach to class ${index + 1}`}</Form.Label>
+                <select
+                  name={`selectedToRange[${index}]`}
+                  onChange={formik.handleChange}
+                  value={formik.values.selectedToRange[index]}
+                  className="form-select"
+                  style={{ marginLeft: "2%" }}
+                >
+                  {[...Array(12).keys()].map((num) => (
+                    <option key={num + 1} value={num + 1}>
+                      {num + 1}
+                    </option>
+                  ))}
+                </select>
+              </Form.Group>
+              {/* Remove button for each set of fields */}
+              <Button
+                variant="danger"
+                onClick={() => removeSubjectField(index)}
+              >
+                Remove
+              </Button>
+            </div>
+          ))}
 
-          <Button variant="primary" type="submit">
-            Signup
+          {/* Button to add more subject fields */}
+          <Button variant="secondary" onClick={addSubjectField}>
+            Add Subject
           </Button>
+
+          {/* Submit button */}
+          <Form.Group
+            controlId="formSubmit"
+            style={{ marginTop: "2vh", marginBottom: "2vh" }}
+          >
+            <Button variant="primary" type="submit">
+              Register
+            </Button>
+          </Form.Group>
         </Form>
-      </div>
-    );
+      )}
+    </div>
+  );
 }
