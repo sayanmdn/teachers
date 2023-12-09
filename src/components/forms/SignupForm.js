@@ -23,21 +23,15 @@ export function SignupForm(props) {
             setemailAlreadyExists(true);
           }
 
-          //USERCREATED SUCCESS
           if (res.data.code === "userCreated") {
             setSignupSuccess(true);
-            // alert("signup success")
           }
 
-          //validationFalse
           if (res.data.code === "validationFalse") {
-            // setValidationError(res.data.message)
             let msg = res.data.message;
             let result = msg.search("password");
             if (result) setPasswordValidationError(msg);
           }
-          // console.log(res);
-          // console.log(res.data);
         })
         .catch((error) => {
           console.log(error);
