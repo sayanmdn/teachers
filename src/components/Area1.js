@@ -65,7 +65,7 @@ export function Area1() {
                 borderRadius: "1rem",
               }}
             >
-              Search by subject
+              Search by Subject or Teacher Name
             </Button>
           </Form>
         </div>
@@ -97,11 +97,10 @@ export function Area1() {
                 <br />
                 <strong>Subjects:</strong> {item.subjects.join(", ")}
                 <br />
-                <strong>To Class:</strong> {item.toClass}
-                <br />
-                <strong>From Class:</strong> {item.fromClass}
-                <br />
-                <strong>Education:</strong> {item.education}
+                <strong>Education:</strong>{" "}
+                {item.degreeEnrolled
+                  .concat(" in ")
+                  .concat(item.subjectEnrolled)}
               </ListGroup.Item>
             ))}
           </ListGroup>
