@@ -61,7 +61,12 @@ export function Area1() {
     <div className="body-backgroud">
       <div className="home-upper">
         <div className="Area1">
-          <div style={{ fontSize: 50, color: "wheat" }}>Find Teacher</div>
+          {auth.user && auth.user.name && (
+            <div style={{ fontSize: 50, color: "wheat" }}>
+              Hi {auth.user.name.split(" ")[0]}!
+            </div>
+          )}
+          <div style={{ fontSize: 50, color: "wheat" }}>Find Your Teacher</div>
           <Form className="data-form" onSubmit={formik.handleSubmit}>
             <Form.Group
               controlId="formBasicName"

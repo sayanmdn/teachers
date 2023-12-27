@@ -22,7 +22,7 @@ export function StudentAccessForm(_props) {
     onSubmit: (values) => {
       axios
         .post(`${URL}students/access`, {
-          otp: values.otp,
+          otp: values.otp.toString(),
           phone: values.phone,
         })
         .then((res) => {
