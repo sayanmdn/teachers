@@ -61,7 +61,7 @@ export function Area1() {
     <div className="body-backgroud">
       <div className="home-upper">
         <div className="Area1">
-          {auth.user && auth.user.name && (
+          {auth.isLoggedIn && auth.user && auth.user.name && (
             <div style={{ fontSize: 50, color: "wheat" }}>
               Hi {auth.user.name.split(" ")[0]}!
             </div>
