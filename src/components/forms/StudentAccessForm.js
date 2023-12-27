@@ -82,7 +82,7 @@ export function StudentAccessForm(_props) {
             number
           </Form.Label>
           <Form.Control
-            type="otp"
+            type="number"
             name="otp"
             placeholder="Enter OTP"
             onChange={formik.handleChange}
