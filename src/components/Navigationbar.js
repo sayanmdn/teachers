@@ -27,10 +27,8 @@ export function Navigationbar(props) {
         { headers: { Authorization: authToken } }
       )
       .then((res) => {
-        console.log(res);
         // If the token is valid, dispatch the user's authentication information
         if (res.data.code === "tokenValid") {
-          console.log("res.data message: " + JSON.stringify(res.data.message));
           dispatch(initAuth(res.data.message));
         }
       })
@@ -89,6 +87,13 @@ export function Navigationbar(props) {
             <NavItem>
               <Nav.Link to="/login" as={Link}>
                 Teacher's Login
+              </Nav.Link>
+            </NavItem>
+          )}
+          {!auth.isLoggedIn && (
+            <NavItem>
+              <Nav.Link to="/student-access" as={Link}>
+                Student Access
               </Nav.Link>
             </NavItem>
           )}

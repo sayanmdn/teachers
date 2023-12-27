@@ -8,6 +8,7 @@ import { Warehouse } from "./components/Warehouse";
 import { Profile } from "./components/Profile";
 import { NewsComponent } from "./components/NewsContainer";
 import { WriteComponent } from "./components/WriteComponent";
+import { StudentAccess } from "./components/StudentAccess";
 import reactGa from "react-ga";
 
 import { Provider } from "react-redux";
@@ -44,6 +45,9 @@ function App() {
             </Route>
             <Route exact path="/write">
               <WriteComponent />
+            </Route>
+            <Route exact path="/student-access">
+              <StudentAccess />
             </Route>
             <Route path="/teachers/:id" component={Profile} />
           </div>
