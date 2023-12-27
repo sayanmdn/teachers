@@ -104,63 +104,64 @@ export function Area1() {
       <br />
       <div>
         <div className="home-name-entry">
-          {(!auth.user || !auth.user.name || !auth.user.class) && (
-            <div>
-              <Form
-                className="data-form"
-                onSubmit={userDetailsForm.handleSubmit}
-              >
-                <Form.Group
-                  controlId="formBasicName"
-                  style={{ width: "40%", margin: "auto", marginTop: "1%" }}
+          {auth.isLoggedIn &&
+            (!auth.user || !auth.user.name || !auth.user.class) && (
+              <div>
+                <Form
+                  className="data-form"
+                  onSubmit={userDetailsForm.handleSubmit}
                 >
-                  <Form.Control
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    onChange={userDetailsForm.handleChange}
-                    value={userDetailsForm.values.data}
+                  <Form.Group
+                    controlId="formBasicName"
+                    style={{ width: "40%", margin: "auto", marginTop: "1%" }}
+                  >
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      onChange={userDetailsForm.handleChange}
+                      value={userDetailsForm.values.data}
+                      style={{
+                        background: "linear-gradient(#112233, #002222)",
+                        borderRadius: "1rem",
+                        borderBlockColor: "wheat",
+                        color: "white",
+                      }}
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    controlId="formBasicClass"
+                    style={{ width: "40%", margin: "auto", marginTop: "1%" }}
+                  >
+                    <Form.Control
+                      type="number"
+                      name="class"
+                      placeholder="Class"
+                      onChange={userDetailsForm.handleChange}
+                      value={userDetailsForm.values.data}
+                      style={{
+                        background: "linear-gradient(#112233, #002222)",
+                        borderRadius: "1rem",
+                        borderBlockColor: "wheat",
+                        color: "white",
+                      }}
+                    />
+                  </Form.Group>
+                  <Button
+                    variant="primary"
+                    type="submit"
                     style={{
-                      background: "linear-gradient(#112233, #002222)",
+                      marginTop: "2%",
+                      color: "InfoText",
+                      backgroundColor: "wheat",
                       borderRadius: "1rem",
-                      borderBlockColor: "wheat",
-                      color: "white",
                     }}
-                  />
-                </Form.Group>
-                <Form.Group
-                  controlId="formBasicClass"
-                  style={{ width: "40%", margin: "auto", marginTop: "1%" }}
-                >
-                  <Form.Control
-                    type="number"
-                    name="class"
-                    placeholder="Class"
-                    onChange={userDetailsForm.handleChange}
-                    value={userDetailsForm.values.data}
-                    style={{
-                      background: "linear-gradient(#112233, #002222)",
-                      borderRadius: "1rem",
-                      borderBlockColor: "wheat",
-                      color: "white",
-                    }}
-                  />
-                </Form.Group>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  style={{
-                    marginTop: "2%",
-                    color: "InfoText",
-                    backgroundColor: "wheat",
-                    borderRadius: "1rem",
-                  }}
-                >
-                  Submit
-                </Button>
-              </Form>
-            </div>
-          )}
+                  >
+                    Submit
+                  </Button>
+                </Form>
+              </div>
+            )}
         </div>
       </div>
       <div
