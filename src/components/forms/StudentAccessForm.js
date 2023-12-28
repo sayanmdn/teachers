@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import axios from "axios";
 import { URL } from "../../config";
-import { STUDENT_USER_ROLE } from "../../constants";
+import { SEND_OTP_API_ENDPOINT, STUDENT_USER_ROLE } from "../../constants";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { initAuth } from "../../redux/actions";
@@ -43,7 +43,10 @@ export function StudentAccessForm(_props) {
   const sendOTP = () => {
     let { phone } = formik.values;
     axios
-      .post(`${URL}user/otpsend`, { phone, role: STUDENT_USER_ROLE })
+      .post(`${SEND_OTP_API_ENDPOINT}user/otpsend`, {
+        phone,
+        role: STUDENT_USER_ROLE,
+      })
       .then((res) => {
         if (res.data.code === "otpSent") {
           setOtpSentSuccessfully(true);

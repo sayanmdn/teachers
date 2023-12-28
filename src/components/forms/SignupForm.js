@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import axios from "axios";
 import { URL } from "../../config";
-import { TEACHER_USER_ROLE } from "../../constants";
+import { SEND_OTP_API_ENDPOINT, TEACHER_USER_ROLE } from "../../constants";
 
 const transformArray = (subjects, selectedFromRange, selectedToRange) => {
   return subjects.map((subject, index) => ({
@@ -66,16 +66,18 @@ export function SignupForm(props) {
 
   const sendOTP = () => {
     let { phone } = formik.values;
-    axios.post(`${URL}user/otpsend`, { phone, role: "TEACHER" }).then((res) => {
-      if (res.data.code === "otpSent") {
-        setOtpSentSuccessfully(true);
-        alert("OTP Sent Successfully to your phone");
-      }
-      if (res.data.code === "validationFalse") {
-        setOtpSentSuccessfully(false);
-        alert(res.data.message || "Error: OTP not sent");
-      }
-    });
+    axios
+      .post(`${SEND_OTP_API_ENDPOINT}user/otpsend`, { phone, role: "TEACHER" })
+      .then((res) => {
+        if (res.data.code === "otpSent") {
+          setOtpSentSuccessfully(true);
+          alert("OTP Sent Successfully to your phone");
+        }
+        if (res.data.code === "validationFalse") {
+          setOtpSentSuccessfully(false);
+          alert(res.data.message || "Error: OTP not sent");
+        }
+      });
   };
 
   const addSubjectField = () => {
