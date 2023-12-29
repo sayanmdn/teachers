@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { delAuth, initAuth } from "../redux/actions";
 import axios from "axios";
 import { URL } from "../config";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
+import { Navbar, Nav, NavItem, Image } from "react-bootstrap";
+import logo from "../assets/logo.png";
 
 // Functional component for the navigation bar
 export function Navigationbar(props) {
@@ -64,7 +65,10 @@ export function Navigationbar(props) {
           style={{ color: "#bbb", marginLeft: "100px" }}
           component={Nav.Link}
         >
-          Find My Teacher
+          <div>
+            <Image src={logo} style={{ width: "50px", height: "50px" }} />
+            <snap>Tutor Trackers</snap>
+          </div>
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
