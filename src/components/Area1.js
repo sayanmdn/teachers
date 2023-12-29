@@ -59,54 +59,15 @@ export function Area1() {
 
   return (
     <div className="body-backgroud">
-      <div className="home-upper">
-        <div className="Area1">
-          {auth.isLoggedIn && auth.user && auth.user.name && (
-            <div style={{ fontSize: 50, color: "wheat" }}>
-              Hi {auth.user.name.split(" ")[0]}!
-            </div>
-          )}
-          <div style={{ fontSize: 50, color: "wheat" }}>Find Your Teacher</div>
-          <Form className="data-form" onSubmit={formik.handleSubmit}>
-            <Form.Group
-              controlId="formBasicName"
-              style={{ width: "60%", margin: "auto", marginTop: "1%" }}
-            >
-              <Form.Control
-                type="text"
-                name="data"
-                placeholder="Biology"
-                onChange={formik.handleChange}
-                value={formik.values.data}
-                style={{
-                  background: "linear-gradient(#112233, #002222)",
-                  borderRadius: "1rem",
-                  borderBlockColor: "wheat",
-                  color: "white",
-                }}
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-              style={{
-                marginTop: "2%",
-                color: "InfoText",
-                backgroundColor: "wheat",
-                borderRadius: "1rem",
-              }}
-            >
-              Search by Subject or Teacher Name
-            </Button>
-          </Form>
-        </div>
-      </div>
-      <br />
       <div>
         <div className="home-name-entry">
           {auth.isLoggedIn &&
             (!auth.user || !auth.user.name || !auth.user.class) && (
               <div>
+                <div style={{ fontSize: 50, color: "wheat" }}>
+                  Please Enter Your Details
+                </div>
+
                 <Form
                   className="data-form"
                   onSubmit={userDetailsForm.handleSubmit}
@@ -164,6 +125,49 @@ export function Area1() {
             )}
         </div>
       </div>
+      <div className="home-upper">
+        <div className="Area1">
+          {auth.isLoggedIn && auth.user && auth.user.name && (
+            <div style={{ fontSize: 50, color: "wheat" }}>
+              Hi {auth.user.name.split(" ")[0]}!
+            </div>
+          )}
+          <div style={{ fontSize: 50, color: "wheat" }}>Find Your Teacher</div>
+          <Form className="data-form" onSubmit={formik.handleSubmit}>
+            <Form.Group
+              controlId="formBasicName"
+              style={{ width: "60%", margin: "auto", marginTop: "1%" }}
+            >
+              <Form.Control
+                type="text"
+                name="data"
+                placeholder="Biology"
+                onChange={formik.handleChange}
+                value={formik.values.data}
+                style={{
+                  background: "linear-gradient(#112233, #002222)",
+                  borderRadius: "1rem",
+                  borderBlockColor: "wheat",
+                  color: "white",
+                }}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              style={{
+                marginTop: "2%",
+                color: "InfoText",
+                backgroundColor: "wheat",
+                borderRadius: "1rem",
+              }}
+            >
+              Search by Subject or Teacher Name
+            </Button>
+          </Form>
+        </div>
+      </div>
+      <br />
       <div
         className="data-api"
         style={{ textAlign: "center", fontSize: "large" }}
