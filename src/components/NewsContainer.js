@@ -12,7 +12,7 @@ export function NewsComponent(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`${URL}user/news`);
+        const response = await axios.get(`${URL}user/news`, { retry: 3 });
         const { data } = response;
         const newsPoints = data.split("- ").filter((string) => string);
         setNews(newsPoints);

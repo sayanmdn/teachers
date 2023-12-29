@@ -30,10 +30,14 @@ export function StudentAccessForm(_props) {
     },
     onSubmit: (values) => {
       axios
-        .post(`${URL}students/access`, {
-          otp: values.otp.toString(),
-          phone: values.phone,
-        })
+        .post(
+          `${URL}students/access`,
+          {
+            otp: values.otp.toString(),
+            phone: values.phone,
+          },
+          { retry: 3 }
+        )
         .then((res) => {
           if (res.data.code === "SUCCESS") {
             localStorage.setItem("token", res.data.token);
@@ -53,10 +57,14 @@ export function StudentAccessForm(_props) {
   const sendOTP = () => {
     let { phone } = formik.values;
     axios
-      .post(`${SEND_OTP_API_ENDPOINT}user/otpsend`, {
-        phone,
-        role: STUDENT_USER_ROLE,
-      })
+      .post(
+        `${SEND_OTP_API_ENDPOINT}user/otpsend`,
+        {
+          phone,
+          role: STUDENT_USER_ROLE,
+        },
+        { retry: 3 }
+      )
       .then((res) => {
         if (res.data.code === "otpSent") {
           setOtpSentSuccessfully(true);
@@ -76,12 +84,16 @@ export function StudentAccessForm(_props) {
     },
     onSubmit: (values) => {
       axios
-        .post(`${URL}students/update`, {
-          name: values.name.trim(),
-          class: values.class,
-          token: localStorage.getItem("token"),
-          phone: phone,
-        })
+        .post(
+          `${URL}students/update`,
+          {
+            name: values.name.trim(),
+            class: values.class,
+            token: localStorage.getItem("token"),
+            phone: phone,
+          },
+          { retry: 3 }
+        )
         .then((res) => {
           alert("User Details Updated");
           dispatch(initAuth({ ...auth.user, ...res.data.student }));

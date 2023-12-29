@@ -23,7 +23,7 @@ export function Area1() {
       setLoading(true);
       setTestData();
       axios
-        .post(`${URL}teachers/find`, { data: values.data.trim() })
+        .post(`${URL}teachers/find`, { data: values.data.trim() }, { retry: 3 })
         .then((res) => {
           if (res.data) {
             setLoading(false);
@@ -44,12 +44,16 @@ export function Area1() {
     },
     onSubmit: (values) => {
       axios
-        .post(`${URL}students/update`, {
-          name: values.name.trim(),
-          class: values.class,
-          token: localStorage.getItem("token"),
-          phone: auth.user.id,
-        })
+        .post(
+          `${URL}students/update`,
+          {
+            name: values.name.trim(),
+            class: values.class,
+            token: localStorage.getItem("token"),
+            phone: auth.user.id,
+          },
+          { retry: 3 }
+        )
         .then((res) => {
           alert("User Details Updated");
           dispatch(initAuth({ ...auth.user, ...res.data.student }));

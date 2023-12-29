@@ -20,11 +20,14 @@ export function Warehouse(props) {
   const fetchData = () => {
     const authToken = localStorage.getItem("token");
     setStateToken(authToken);
-    axios({
-      method: "post",
-      url: URL + "user/getdata",
-      data: { token: authToken },
-    })
+    axios(
+      {
+        method: "post",
+        url: URL + "user/getdata",
+        data: { token: authToken },
+      },
+      { retry: 3 }
+    )
       .then((res) => {
         setTestData(res.data);
       })

@@ -28,7 +28,7 @@ export function WriteComponent(props) {
         .post(
           `${URL}user/write`,
           { text: values.data },
-          { headers: { Authorization: stateToken } }
+          { headers: { Authorization: stateToken }, retry: 3 }
         )
         .then((res) => {
           if (res.data) {

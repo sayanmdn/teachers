@@ -33,21 +33,25 @@ export function SignupForm(props) {
     },
     onSubmit: (values) => {
       axios
-        .post(`${URL}user/signup`, {
-          name: values.name,
-          role: TEACHER_USER_ROLE,
-          otp: values.otp,
-          password: values.password,
-          phone: values.phone,
-          college: values.college,
-          subjectEnrolled: values.subjectEnrolled,
-          degreeEnrolled: values.degreeEnrolled,
-          subjects: transformArray(
-            values.subjects.map((e) => e.trim()),
-            values.selectedFromRange,
-            values.selectedToRange
-          ),
-        })
+        .post(
+          `${URL}user/signup`,
+          {
+            name: values.name,
+            role: TEACHER_USER_ROLE,
+            otp: values.otp,
+            password: values.password,
+            phone: values.phone,
+            college: values.college,
+            subjectEnrolled: values.subjectEnrolled,
+            degreeEnrolled: values.degreeEnrolled,
+            subjects: transformArray(
+              values.subjects.map((e) => e.trim()),
+              values.selectedFromRange,
+              values.selectedToRange
+            ),
+          },
+          { retry: 3 }
+        )
         .then((res) => {
           if (res.data === "Email already exists") {
             setemailAlreadyExists(true);
@@ -72,7 +76,12 @@ export function SignupForm(props) {
   const sendOTP = () => {
     let { phone } = formik.values;
     axios
-      .post(`${SEND_OTP_API_ENDPOINT}user/otpsend`, { phone, role: "TEACHER" })
+      // return true
+      .post(
+        `${SEND_OTP_API_ENDPOINT}user/otpsend`,
+        { phone, role: "TEACHER" },
+        { retry: 3 }
+      )
       .then((res) => {
         if (res.data.code === "otpSent") {
           setOtpSentSuccessfully(true);

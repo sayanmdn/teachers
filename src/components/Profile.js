@@ -22,7 +22,7 @@ export function Profile() {
           {
             id,
           },
-          { headers: { Authorization: token } }
+          { headers: { Authorization: token }, retry: 3 }
         );
         setProfile(response.data);
         return response;

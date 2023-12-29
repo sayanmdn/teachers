@@ -25,7 +25,7 @@ export function Navigationbar(props) {
       .post(
         `${URL}post/isAuthenticated`,
         { token: "not needed here" },
-        { headers: { Authorization: authToken } }
+        { headers: { Authorization: authToken }, retry: 3 }
       )
       .then((res) => {
         // If the token is valid, dispatch the user's authentication information
