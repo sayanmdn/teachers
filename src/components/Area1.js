@@ -123,7 +123,7 @@ export function Area1() {
               Hi {auth.user.name.split(" ")[0]}!
             </div>
           )}
-          <div style={{ fontSize: 50, color: "wheat" }}>Find Your Teacher</div>
+          <div style={{ fontSize: 50, color: "wheat" }}>Find Your Tutor</div>
           <Form className="data-form" onSubmit={formik.handleSubmit}>
             <Form.Group
               controlId="formBasicName"
