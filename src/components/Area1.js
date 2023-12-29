@@ -6,6 +6,7 @@ import axios from "axios";
 import { URL } from "../config";
 import { useSelector, useDispatch } from "react-redux";
 import { initAuth } from "../redux/actions";
+import { INPUT_FILD_STYLE } from "../constants";
 
 export function Area1() {
   const [loading, setLoading] = useState(false);
@@ -82,12 +83,7 @@ export function Area1() {
                       placeholder="Name"
                       onChange={userDetailsForm.handleChange}
                       value={userDetailsForm.values.data}
-                      style={{
-                        background: "linear-gradient(#112233, #002222)",
-                        borderRadius: "1rem",
-                        borderBlockColor: "wheat",
-                        color: "white",
-                      }}
+                      style={INPUT_FILD_STYLE}
                     />
                   </Form.Group>
                   <Form.Group
@@ -100,12 +96,7 @@ export function Area1() {
                       placeholder="Class"
                       onChange={userDetailsForm.handleChange}
                       value={userDetailsForm.values.data}
-                      style={{
-                        background: "linear-gradient(#112233, #002222)",
-                        borderRadius: "1rem",
-                        borderBlockColor: "wheat",
-                        color: "white",
-                      }}
+                      style={INPUT_FILD_STYLE}
                     />
                   </Form.Group>
                   <Button
@@ -144,12 +135,7 @@ export function Area1() {
                 placeholder="Biology"
                 onChange={formik.handleChange}
                 value={formik.values.data}
-                style={{
-                  background: "linear-gradient(#112233, #002222)",
-                  borderRadius: "1rem",
-                  borderBlockColor: "wheat",
-                  color: "white",
-                }}
+                style={INPUT_FILD_STYLE}
               />
             </Form.Group>
             <Button

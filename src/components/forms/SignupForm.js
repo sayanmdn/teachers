@@ -3,7 +3,12 @@ import { Form, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import axios from "axios";
 import { URL } from "../../config";
-import { SEND_OTP_API_ENDPOINT, TEACHER_USER_ROLE } from "../../constants";
+import {
+  SEND_OTP_API_ENDPOINT,
+  TEACHER_USER_ROLE,
+  INPUT_FILD_STYLE,
+  BUTTON_STYLE,
+} from "../../constants";
 
 const transformArray = (subjects, selectedFromRange, selectedToRange) => {
   return subjects.map((subject, index) => ({
@@ -125,6 +130,7 @@ export function SignupForm(props) {
               name="name"
               placeholder="Enter Name"
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.name}
             />
           </Form.Group>
@@ -136,13 +142,18 @@ export function SignupForm(props) {
               name="phone"
               readOnly={otpSentSuccessfully}
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.phone}
             />
             <Form.Text className="text-muted" hidden={!emailAlreadyExists}>
               This phone number is already exists, try with another number
             </Form.Text>
             <Form.Text className="text-muted">
-              <Button onClick={sendOTP} hidden={otpSentSuccessfully}>
+              <Button
+                onClick={sendOTP}
+                hidden={otpSentSuccessfully}
+                style={BUTTON_STYLE}
+              >
                 Send OTP to the phone number
               </Button>
             </Form.Text>
@@ -157,6 +168,7 @@ export function SignupForm(props) {
               name="otp"
               placeholder="Enter OTP"
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.otp}
             />
           </Form.Group>
@@ -168,6 +180,7 @@ export function SignupForm(props) {
               placeholder="Password"
               name="password"
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.password}
             />
             <Form.Text className="text-muted" hidden={!passwordValidationError}>
@@ -183,6 +196,7 @@ export function SignupForm(props) {
               name="college"
               placeholder="Name of college"
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.college}
             />
           </Form.Group>
@@ -195,6 +209,7 @@ export function SignupForm(props) {
               name="subjectEnrolled"
               placeholder="Subject you are enrolled in"
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.subjectEnrolled}
             />
           </Form.Group>
@@ -207,6 +222,7 @@ export function SignupForm(props) {
               name="degreeEnrolled"
               placeholder="Degree you are enrolled in"
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.degreeEnrolled}
             />
           </Form.Group>
@@ -224,6 +240,7 @@ export function SignupForm(props) {
                   name={`subjects[${index}]`}
                   placeholder="Enter Subject"
                   onChange={formik.handleChange}
+                  style={INPUT_FILD_STYLE}
                   value={formik.values.subjects[index]}
                 />
               </Form.Group>
@@ -235,7 +252,7 @@ export function SignupForm(props) {
                   onChange={formik.handleChange}
                   value={formik.values.selectedFromRange[index]}
                   className="form-select"
-                  style={{ marginLeft: "2%" }}
+                  style={{ ...INPUT_FILD_STYLE, marginLeft: "2%" }}
                 >
                   {[...Array(12).keys()].map((num) => (
                     <option key={num + 1} value={num + 1}>
@@ -252,7 +269,7 @@ export function SignupForm(props) {
                   onChange={formik.handleChange}
                   value={formik.values.selectedToRange[index]}
                   className="form-select"
-                  style={{ marginLeft: "2%" }}
+                  style={{ ...INPUT_FILD_STYLE, marginLeft: "2%" }}
                 >
                   {[...Array(12).keys()].map((num) => (
                     <option key={num + 1} value={num + 1}>
@@ -281,8 +298,8 @@ export function SignupForm(props) {
             controlId="formSubmit"
             style={{ marginTop: "2vh", marginBottom: "2vh" }}
           >
-            <Button variant="primary" type="submit">
-              Register
+            <Button variant="primary" type="submit" style={BUTTON_STYLE}>
+              Register Teacher
             </Button>
           </Form.Group>
         </Form>

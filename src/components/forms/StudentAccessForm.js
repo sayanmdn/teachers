@@ -3,7 +3,12 @@ import { Form, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import axios from "axios";
 import { URL } from "../../config";
-import { SEND_OTP_API_ENDPOINT, STUDENT_USER_ROLE } from "../../constants";
+import {
+  SEND_OTP_API_ENDPOINT,
+  STUDENT_USER_ROLE,
+  INPUT_FILD_STYLE,
+  BUTTON_STYLE,
+} from "../../constants";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { initAuth } from "../../redux/actions";
@@ -101,12 +106,7 @@ export function StudentAccessForm(_props) {
               placeholder="Name"
               onChange={userDetailsForm.handleChange}
               value={userDetailsForm.values.data}
-              style={{
-                background: "linear-gradient(#112233, #002222)",
-                borderRadius: "1rem",
-                borderBlockColor: "wheat",
-                color: "white",
-              }}
+              style={INPUT_FILD_STYLE}
             />
           </Form.Group>
           <Form.Group
@@ -119,24 +119,10 @@ export function StudentAccessForm(_props) {
               placeholder="Class"
               onChange={userDetailsForm.handleChange}
               value={userDetailsForm.values.data}
-              style={{
-                background: "linear-gradient(#112233, #002222)",
-                borderRadius: "1rem",
-                borderBlockColor: "wheat",
-                color: "white",
-              }}
+              style={INPUT_FILD_STYLE}
             />
           </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
-            style={{
-              marginTop: "2%",
-              color: "InfoText",
-              backgroundColor: "wheat",
-              borderRadius: "1rem",
-            }}
-          >
+          <Button variant="primary" type="submit" style={BUTTON_STYLE}>
             Submit
           </Button>
         </Form>
@@ -154,11 +140,16 @@ export function StudentAccessForm(_props) {
               name="phone"
               readOnly={otpSentSuccessfully}
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.phone}
             />
 
             <Form.Text className="text-muted">
-              <Button onClick={sendOTP} hidden={otpSentSuccessfully}>
+              <Button
+                onClick={sendOTP}
+                hidden={otpSentSuccessfully}
+                style={BUTTON_STYLE}
+              >
                 Send OTP to the phone number
               </Button>
             </Form.Text>
@@ -173,6 +164,7 @@ export function StudentAccessForm(_props) {
               name="otp"
               placeholder="Enter OTP"
               onChange={formik.handleChange}
+              style={INPUT_FILD_STYLE}
               value={formik.values.otp}
             />
           </Form.Group>
@@ -182,7 +174,7 @@ export function StudentAccessForm(_props) {
             controlId="formSubmit"
             style={{ marginTop: "2vh", marginBottom: "2vh" }}
           >
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" style={BUTTON_STYLE}>
               Get Access
             </Button>
           </Form.Group>
