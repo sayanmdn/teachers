@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { Form, Button, Spinner, ListGroup } from "react-bootstrap";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { URL } from "../config";
 import { useSelector, useDispatch } from "react-redux";
+import AOS from "aos";
 import { initAuth } from "../redux/actions";
 import { INPUT_FILD_STYLE } from "../constants";
 
@@ -14,6 +15,10 @@ export function Area1() {
   let dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -55,10 +60,16 @@ export function Area1() {
           { retry: 3 }
         )
         .then((res) => {
-          alert("User Details Updated");
-          dispatch(initAuth({ ...auth.user, ...res.data.student }));
+          if (res.data.code === "validationFalse") {
+            alert(res.data.message || "Data is not corrct");
+          } else {
+            alert("User Details Updated");
+            dispatch(initAuth({ ...auth.user, ...res.data.student }));
+          }
         })
-        .catch((_error) => {});
+        .catch((_error) => {
+          alert("Error: User Details not Updated");
+        });
     },
   });
 
@@ -178,7 +189,7 @@ export function Area1() {
             }}
           >
             {testData.map((item, index) => (
-              <ListGroup.Item key={index}>
+              <ListGroup.Item key={index} data-aos="fade-up">
                 <strong>Name:</strong>{" "}
                 <Link to={`/teachers/${item._id}`}>{item.name}</Link>
                 <br />
