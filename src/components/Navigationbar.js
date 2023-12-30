@@ -109,6 +109,11 @@ export function Navigationbar(props) {
               </Nav.Link>
             </NavItem>
           )}
+          <NavItem>
+            <Nav.Link to="/contact-us" as={Link}>
+              Contact Us
+            </Nav.Link>
+          </NavItem>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

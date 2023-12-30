@@ -5,6 +5,7 @@ import { Area1 } from "./components/Area1";
 import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
 import { StudentAccess } from "./components/StudentAccess";
+import { Contact } from "./components/Contact";
 import reactGa from "react-ga";
 // import { Login } from "./components/Login";
 // import { Warehouse } from "./components/Warehouse";
@@ -48,6 +49,9 @@ function App() {
             </Route> */}
             <Route exact path="/student-access">
               <StudentAccess />
+            </Route>
+            <Route exact path="/contact-us">
+              <Contact />
             </Route>
             <Route path="/teachers/:id" component={Profile} />
           </div>
