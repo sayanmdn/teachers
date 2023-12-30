@@ -196,9 +196,9 @@ export function Area1() {
                 <strong>Subjects:</strong> {item.subjects.join(", ")}
                 <br />
                 <strong>Education:</strong>{" "}
-                {item.degreeEnrolled
+                {(item.degreeEnrolled || "Not Specified")
                   .concat(" in ")
-                  .concat(item.subjectEnrolled)}
+                  .concat(item.subjectEnrolled || "Not Specified")}
               </ListGroup.Item>
             ))}
           </ListGroup>
