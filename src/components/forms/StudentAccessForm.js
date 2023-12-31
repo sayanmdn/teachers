@@ -95,11 +95,17 @@ export function StudentAccessForm(_props) {
           { retry: 3 }
         )
         .then((res) => {
-          alert("User Details Updated");
-          dispatch(initAuth({ ...auth.user, ...res.data.student }));
-          history.push("/");
+          if (res.data.code === "validationFalse") {
+            alert(res.data.message || "Unable to Update User Details");
+          } else {
+            alert("User Details Updated");
+            dispatch(initAuth({ ...auth.user, ...res.data.student }));
+            history.push("/");
+          }
         })
-        .catch((_error) => {});
+        .catch((error) => {
+          alert(error);
+        });
     },
   });
 

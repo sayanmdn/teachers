@@ -48,7 +48,7 @@ export function Navigationbar(props) {
     // Dispatch an action to delete the user's authentication information
     dispatch(delAuth());
     // Redirect the user to the login page
-    history.push("/login");
+    history.push("/");
   };
 
   // Render the navigation bar component
