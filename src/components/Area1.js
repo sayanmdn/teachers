@@ -139,6 +139,9 @@ export function Area1() {
             </div>
           )}
           <div style={{ fontSize: 50, color: "wheat" }}>Find Your Tutor</div>
+          <div style={{ fontSize: 25, color: "wheat" }}>
+            Currently available only in Midnapore Town
+          </div>
           <Form className="data-form" onSubmit={formik.handleSubmit}>
             <Form.Group
               controlId="formBasicName"
