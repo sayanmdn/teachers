@@ -137,7 +137,7 @@ export function SignupForm(props) {
             <Form.Control
               type="name"
               name="name"
-              placeholder="Enter Name"
+              placeholder="Enter Your Name"
               onChange={formik.handleChange}
               style={INPUT_FILD_STYLE}
               value={formik.values.name}
@@ -147,7 +147,7 @@ export function SignupForm(props) {
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
               type="phone"
-              placeholder="Enter Phone Number"
+              placeholder="Enter Your Phone Number"
               name="phone"
               readOnly={otpSentSuccessfully}
               onChange={formik.handleChange}
@@ -199,11 +199,11 @@ export function SignupForm(props) {
 
           <Form.Group controlId="formBasicCollege">
             <Form.Label>
-              Name of the college where you pursuing / completed studing?
+              Name of the college where you are pursuing / completed studying?
             </Form.Label>
             <Form.Control
               name="college"
-              placeholder="Name of college"
+              placeholder="Name of College"
               onChange={formik.handleChange}
               style={INPUT_FILD_STYLE}
               value={formik.values.college}
@@ -216,7 +216,7 @@ export function SignupForm(props) {
             </Form.Label>
             <Form.Control
               name="subjectEnrolled"
-              placeholder="Subject you are enrolled in"
+              placeholder="Subject Enrolled In. e.g. Physics, Chemistry, etc."
               onChange={formik.handleChange}
               style={INPUT_FILD_STYLE}
               value={formik.values.subjectEnrolled}
@@ -229,25 +229,25 @@ export function SignupForm(props) {
             </Form.Label>
             <Form.Control
               name="degreeEnrolled"
-              placeholder="Degree you are enrolled in"
+              placeholder="Degree Enrolled In. e.g. BSc, MSc. etc."
               onChange={formik.handleChange}
               style={INPUT_FILD_STYLE}
               value={formik.values.degreeEnrolled}
             />
           </Form.Group>
           <Form.Label>
-            Please specify the subjects you would like to receive tuition
-            requests for, indicating the class level as well.
+            Please specify the subjects for which you would like to receive
+            tuition requests, indicating the class level as well.
           </Form.Label>
           {/* Subjects, selectedFromRange, and selectedToRange input fields */}
-          {formik.values.subjects.map((subject, index) => (
+          {formik.values.subjects.map((_subject, index) => (
             <div key={index}>
               <Form.Group controlId={`formBasicSubject${index}`}>
-                <Form.Label>{`Subject ${index + 1}`}</Form.Label>
+                <Form.Label>{`Subject [${index + 1}]`}</Form.Label>
                 <Form.Control
                   type="subject"
                   name={`subjects[${index}]`}
-                  placeholder="Enter Subject"
+                  placeholder="Enter Subject Name"
                   onChange={formik.handleChange}
                   style={INPUT_FILD_STYLE}
                   value={formik.values.subjects[index]}
@@ -255,7 +255,7 @@ export function SignupForm(props) {
               </Form.Group>
 
               <Form.Group controlId={`formBasicRangeFrom${index}`}>
-                <Form.Label>{`Teach from class ${index + 1}`}</Form.Label>
+                <Form.Label>{`Teach from class [${index + 1}]`}</Form.Label>
                 <select
                   name={`selectedFromRange[${index}]`}
                   onChange={formik.handleChange}
@@ -272,7 +272,7 @@ export function SignupForm(props) {
               </Form.Group>
 
               <Form.Group controlId={`formBasicRangeTo${index}`}>
-                <Form.Label>{`Teach to class ${index + 1}`}</Form.Label>
+                <Form.Label>{`Teach to class [${index + 1}]`}</Form.Label>
                 <select
                   name={`selectedToRange[${index}]`}
                   onChange={formik.handleChange}
