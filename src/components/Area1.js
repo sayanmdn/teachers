@@ -190,9 +190,10 @@ export function Area1() {
               color: "black",
               background: "blue",
             }}
+            data-aos="fade-up"
           >
             {testData.map((item, index) => (
-              <ListGroup.Item key={index} data-aos="fade-up">
+              <ListGroup.Item key={index}>
                 <strong>Name:</strong>{" "}
                 <Link to={`/teachers/${item._id}`}>{item.name}</Link>
                 <br />
