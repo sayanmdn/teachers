@@ -6,6 +6,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useHistory } from "react-router-dom";
+import { isNil } from "lodash";
 
 export function Profile() {
   const { id } = useParams();
@@ -87,8 +88,17 @@ export function Profile() {
                 <h3>Contact Information</h3>
                 <p>
                   <strong>Phone:</strong>{" "}
-                  {profile.phone ? (
+                  {!isNil(profile.phone) ? (
                     <a href={`tel:${profile.phone}`}>{profile.phone}</a>
+                  ) : !isNil(profile.numberOfvisitedProfiles) &&
+                    profile.numberOfvisitedProfiles >= 5 ? (
+                    <div>
+                      <b>Limit Exceeded</b>
+                      <br></br>
+                      Sorry, the limit has been exceeded. Student are allowed to
+                      have a maximum of 5 contacts per day. Please try again
+                      after 24 hours.
+                    </div>
                   ) : (
                     <div>
                       <p>
