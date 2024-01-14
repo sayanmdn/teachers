@@ -12,6 +12,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { initAuth } from "../../redux/actions";
+import { isEmpty, isNumber } from "lodash";
 
 export function StudentAccessForm(_props) {
   const [otpSentSuccessfully, setOtpSentSuccessfully] = useState(false);
@@ -46,6 +47,16 @@ export function StudentAccessForm(_props) {
             dispatch(
               initAuth({ ...res.data.student, role: STUDENT_USER_ROLE })
             );
+
+            // Redirect to home page if user details are already filled
+            if (
+              !(
+                isEmpty(res.data.student.name) ||
+                !isNumber(res.data.student.class)
+              )
+            ) {
+              history.push("/");
+            }
           }
         })
         .catch((error) => {
